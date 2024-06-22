@@ -18,7 +18,7 @@ const Pagination = React.lazy(() => import("./features/pagination/Pagination"));
 const Search = React.lazy(() => import("./features/search/Search"));
 const SlideOver = React.lazy(() => import("./features/Modals/SlideOver"));
 
-const container = {
+export const container = {
   hidden: { opacity: 1, scale: 0 },
   visible: {
     opacity: 1,
@@ -30,10 +30,7 @@ const container = {
   },
 };
 
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
+
 
 const Products: React.FC = () => {
   const [category, setCategory] = useState<string>("");
@@ -70,7 +67,6 @@ const Products: React.FC = () => {
 
   return (
     <div className="bg-gray-80">
-      <section className="flex justify-center items-center w-full pt-4">
         <Suspense fallback={<div>Loading Search...</div>}>
           <Search
             onSearch={handleSearch}
@@ -79,15 +75,19 @@ const Products: React.FC = () => {
             handleCategory={handleCategory}
           />
         </Suspense>
-      </section>
       <section
-        className="flex lg:ml-12 lg:justify-start sm:ml-4 justify-center md:ml-6 gap-2 mt-2 cursor-pointer  items-center"
+        className=" 
+        inline-flex 
+        lg:justify-start w-auto ml-12
+        sm:w-auto ml-2
+        md:ml-6 gap-2  
+        mt-2 cursor-pointer items-center"
         onClick={() => {
           setSortFilter(!sortFilter);
         }}
       >
-        <IoFilterSharp className="lg:text-3xl md:text-3xl sm:text-xl" />
-        <p className="lg:text-2xl md:text-3xl sm:text-9xl">Filter</p>
+        <IoFilterSharp className="lg:text-3xl md:text-xl sm:text-6xl" />
+        <p className="lg:text-2xl md:text-xl sm:text-9xl">Filter</p>
         <Suspense fallback={<div>Loading Filter...</div>}>
           <SlideOver open={sortFilter} setOpen={setSortFilter} />
         </Suspense>
@@ -107,13 +107,12 @@ const Products: React.FC = () => {
                 md:w-1/2 h-auto
                 sm:w-full h-full
                 hover:opacity-75 
-                rounded-l
-                border border-rose-100 
+                rounded-l 
                 p-1
                 "
           >
             <section
-              className="productimage  
+              className="productimage border border-rose-100 
                 "
             >
               <img

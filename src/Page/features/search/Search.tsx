@@ -29,13 +29,22 @@ const Search: React.FC<SearchProps> = ({
   };
 
   return (
-    <div className="p-1 rounded-md lg:w-1/2 sm:w-full container"> {/* Container for search component */}
-      <div className="lg:flex searchcontainer"> {/* Flex container for input and select */}
+    <div className="p-2 rounded-md mt-6
+    flex 
+    w-full "> {/* Container for search component */}
+      <div className="w-full 
+      flex items-center justify-center
+       sm:flex-row flex-wrap 
+       searchcontainer
+       "> {/* Flex container for input and select */}
         <input
           type="text"
           name="price"
           id="price"
-          className="w-full rounded-md border py-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+          className="
+          w-full
+          lg:w-1/2 
+          rounded-md border py-2 pl-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
           placeholder="Search by name or description"
           value={searchContent}
           onChange={(e) => handleSearch(e.target.value)} // Invoke handleSearch on input change
@@ -43,7 +52,13 @@ const Search: React.FC<SearchProps> = ({
         <select
           id="currency"
           name="currency"
-          className="lg:w-1/4 category_container rounded-md py-2 pl-1 text-gray-700 border-2 border-gray-300 outline-none justify-center flex items-center font-bold text-blue-300 bg-gray-100 sm:text-sm"
+          className="
+           lg:w-1/6 
+           md:w-1/6 
+           sm:w-1/5 py-1 
+           category_container rounded-md py-2 pl-1 text-gray-700 border-2 border-gray-300 outline-none 
+          flex items-center justify-center
+          font-bold text-blue-300 bg-gray-100 sm:text-sm"
           defaultValue=""
           onChange={handleSelectedCategory} // Invoke handleSelectedCategory on select change
           data-testid="category-select" // Test ID for testing purposes
