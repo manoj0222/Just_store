@@ -1,0 +1,28 @@
+.productlist {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 10px;
+  height:auto;
+}
+
+.productimage {
+  width: 280px;
+  height: 400px;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 904px) and (max-height: 1000px) {
+  .imagecontainer {
+    width: 100%;
+  }
+  .searchcontainer {
+    width: 100%;
+  }
+  .productimage {
+    width: 96%;
+    height: 84%;
+  }
+}
