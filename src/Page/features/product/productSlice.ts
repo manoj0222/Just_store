@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import ProductType from "../../../interfaces/ProductType";
-import { RootState } from "src/reducers/store";
+import { RootState } from "../../../reducers/store";
 import { toast } from "react-toastify";
 import { sortBy, sortByRatings } from "../../../util/customSort";
 import { paginateProducts } from "../../../util/productReducerHelper";

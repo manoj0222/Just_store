@@ -11,7 +11,7 @@ import useFetch from "../hooks/useFecth";
 import useMemorizedCategories from "../hooks/useMemorizedCategories";
 import "../styles/product.css";
 import { motion } from "framer-motion";
-import ProductType from "src/interfaces/ProductType";
+import ProductType from "../interfaces/ProductType";
 
 // Lazy load components
 const Pagination = React.lazy(() => import("./features/pagination/Pagination"));
