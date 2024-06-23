@@ -17,7 +17,7 @@ import { Link } from "react-router-dom"; // Importing Link for navigation
  */
 const NavBar: React.FC = () => {
   return (
-    <nav className="flex w-full justify-between items-center h-12 rounded-l border-2 shadow-slate-100  top-0 border-slate-200 px-2 bg-white">
+    <nav className="flex w-full justify-between items-center h-12 rounded-l border-2 shadow-slate-100  top-0 border-slate-200 px-1 bg-white">
       <section className="flex items-center gap-2 w-full md:w-1/3 sm:w-1/2">
         <img
           src={Logo}

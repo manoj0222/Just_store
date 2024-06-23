@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import "../../../styles/sortfilter.css";
-import { MdClear } from "react-icons/md";
+import { GrPowerReset } from "react-icons/gr";
 import { sortByHighToLow,sortByLowToHigh,sortByRating,resetAll } from "../product/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProducts } from "../product/productSlice";
@@ -73,7 +73,7 @@ const SortFilters: React.FC = () => {
       </section>
       <section className="flex justify-end items-center py-4 rounded-xl">
         <button className="p-3 hover:bg-gray-200 rounded-full" onClick={handleResetall}>
-         <MdClear className="lg:text-2xl sm:text-4xl md:text-3xl" />
+         <GrPowerReset  className="lg:text-2xl sm:text-4xl md:text-3xl" />
         </button>
       </section>
     </div>

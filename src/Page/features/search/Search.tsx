@@ -1,36 +1,42 @@
 import React, { useState } from "react";
 import ProductType from "../../../interfaces/ProductType";
 import "../../../styles/search.css"; // Import CSS for styling
+import Suggestion from "./suggestion/Suggestion";
 
 type SearchProps = {
-  onSearch: (query: string) => void; // Callback function for search
   products: ProductType[]; // Array of products
   categories: string[]; // Array of category names
   handleCategory: (query: string) => void; // Callback function for category selection
 };
 
 const Search: React.FC<SearchProps> = ({
-  onSearch,
+
   products,
   categories,
   handleCategory,
 }) => {
   const [searchContent, setSearchContent] = useState<string>(""); // State to hold search input value
+  const [category,setCategory] = useState<string>("");
 
   // Handler for search input change
   const handleSearch = (value: string) => {
     setSearchContent(value); // Update searchContent state with input value
-    onSearch(value); // Call onSearch callback with current search input value
   };
 
   // Handler for category select change
   const handleSelectedCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     handleCategory(e.target.value); // Call handleCategory callback with selected category value
+    setCategory(e.target.value);
   };
 
   return (
-    <div className="p-2 rounded-md mt-6
-    flex 
+    <div className="p-2 rounded-md mt-6 
+    flex
+    flex-row
+    flex-wrap
+    justify-center
+    items-center
+    relative z-2
     w-full "> {/* Container for search component */}
       <div className="w-full 
       flex items-center justify-center
@@ -72,7 +78,11 @@ const Search: React.FC<SearchProps> = ({
           ))}
         </select>
       </div>
+      <span  className="w-full flex items-center justify-center z-20">
+          {searchContent.length>0&&<Suggestion category={category} searchedText={searchContent}/>}
+      </span>
     </div>
+
   );
 };
 
