@@ -13,6 +13,8 @@ import "../styles/product.css";
 import { motion } from "framer-motion";
 import ProductType from "../interfaces/ProductType";
 
+
+
 // Lazy load components
 const Pagination = React.lazy(() => import("./features/pagination/Pagination"));
 const Search = React.lazy(() => import("./features/search/Search"));
@@ -42,17 +44,12 @@ const Products: React.FC = () => {
 
   const memorizedCategory = useMemorizedCategories(allProducts);
 
-  const handleSearch = useCallback(
-    (query: string) => {
-      dispatch(filterProducts({ searchText: query, category: category }));
-    },
-    [dispatch, category]
-  );
+ 
 
   const handleCategory = useCallback(
     (query: string) => {
       setCategory(query);
-      dispatch(filterProducts({ searchText: "", category: query }));
+      dispatch(filterProducts({ category: query }));
     },
     [dispatch]
   );
@@ -66,14 +63,14 @@ const Products: React.FC = () => {
   }
 
   return (
-    <div className="bg-gray-80">
+    <div >
         <Suspense fallback={<div>Loading Search...</div>}>
           <Search
-            onSearch={handleSearch}
             products={products}
             categories={memorizedCategory}
             handleCategory={handleCategory}
           />
+          
         </Suspense>
       <section
         className=" 
@@ -93,7 +90,7 @@ const Products: React.FC = () => {
         </Suspense>
       </section>
       <motion.ul
-        className="productlist p-4 mt-2"
+        className="productlist p-4 mt-2 relative z-1;"
         variants={container}
         initial="hidden"
         animate="visible"
@@ -107,25 +104,27 @@ const Products: React.FC = () => {
                 md:w-1/2 h-auto
                 sm:w-full h-full
                 hover:opacity-75 
-                rounded-l 
-                p-1
+                rounded-xl 
+                border
+                hover:bg-white hover:shadow-lg
+                 
                 "
           >
             <section
-              className="productimage border border-rose-100 
+              className="productimage  
                 "
             >
               <img
                 src={product.image}
                 alt={product.title}
-                className="h-full w-full object-cover object-center group-hover:opacity-75 "
+                className="h-full w-full object-cover object-center group-hover:opacity-75 rounded-xl p-2"
               />
             </section>
-            <span>
-              <p className="text-sm text-gray-700 text-start text-pretty mt-2">
+            <span >
+              <p className="text-sm text-blue-500 text-start text-pretty mt-2 p-1 font-semibold">
                 {product.title}
               </p>
-              <p className="mt-1 text-lg font-medium text-gray-900 text-start">
+              <p className="mt-1 text-lg font-medium text-gray-900 text-start p-1">
                 ${product.price}
               </p>
             </span>

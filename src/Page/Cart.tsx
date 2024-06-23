@@ -11,7 +11,7 @@ import { AppDispatch, RootState } from "../reducers/store";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import CartItem from "./features/cart/CartItem";
-import CartType from "src/interfaces/CartType";
+import CartType from "../interfaces/CartType";
 import { motion } from "framer-motion";
 import { container } from "./Products";
 
