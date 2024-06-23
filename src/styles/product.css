@@ -8,9 +8,13 @@
 }
 
 .productimage {
-  width: 280px;
-  height: 400px;
+  width: 286px;
+  height: 290px;
   object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
 }
 
 @media only screen and (max-width: 760px),

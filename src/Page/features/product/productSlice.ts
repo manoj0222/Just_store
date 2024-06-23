@@ -17,7 +17,7 @@ export interface ProductsState {
   isSelectedProduct: ProductType | null; // Currently selected product
   filteredProducts: ProductType[]; // Array of products after applying filters
   searchText: string | null; // Text for searching products by name or description
-  selectedCategory: string | null; // Selected category for filtering products
+  selectedCategory: string | ""; // Selected category for filtering products
   unSortedProducts: ProductType[] | []; // Unsorted products as fetched from API
   sortBypriceHightoLowfilterFlag: boolean; // Flag for sorting by price high to low
   sortBypriceLowtoHighFlag: boolean; // Flag for sorting by price low to high
@@ -33,7 +33,7 @@ const initialState: ProductsState = {
   isSelectedProduct: null,
   filteredProducts: [],
   searchText: null,
-  selectedCategory: null,
+  selectedCategory: "",
   unSortedProducts: [],
   sortBypriceHightoLowfilterFlag: false,
   sortBypriceLowtoHighFlag: false,
@@ -53,46 +53,15 @@ const productSlice = createSlice({
         state.itemsPerPage
       );
     },
-    onsucess: (state) => {
+    onsucess: () => {
       toast.success("Added Cart");
     },
-    filterProducts: (
-      state,
-      action: PayloadAction<{ searchText: string; category: string }>
-    ) => {
-      state.searchText = action.payload.searchText;
+    filterProducts: (state, action: PayloadAction<{ category: string }>) => {
       state.selectedCategory = action.payload.category;
       state.page = 1;
-      if (state.searchText !== "" && state.selectedCategory !== "") {
+      if (state.selectedCategory !== "") {
         state.filteredProducts = state.allProducts.filter(
-          (product) =>
-            product.title
-              .toLowerCase()
-              .includes(state.searchText!.toLowerCase()) ||
-            product.description
-              .toLowerCase()
-              .includes(state.searchText!.toLowerCase())
-        );
-        state.filteredProducts = state.filteredProducts.filter((product) =>
-          product.category??""
-            .toLowerCase()
-            .includes(state.selectedCategory!.toLowerCase())
-        );
-      } else if (state.searchText !== "" && state.selectedCategory === "") {
-        state.filteredProducts = state.allProducts.filter(
-          (product) =>
-            product.title
-              .toLowerCase()
-              .includes(state.searchText!.toLowerCase()) ||
-            product.description
-              .toLowerCase()
-              .includes(state.searchText!.toLowerCase())
-        );
-      } else if (state.selectedCategory !== "" && state.searchText === "") {
-        state.filteredProducts = state.allProducts.filter((product) =>
-          product.category??""
-            .toLowerCase()
-            .includes(state.selectedCategory!.toLowerCase())
+          (product) => product.category?.toLowerCase() === state.selectedCategory.toLowerCase()
         );
       } else {
         state.filteredProducts = state.allProducts;
@@ -115,10 +84,13 @@ const productSlice = createSlice({
           sortByRatings("rating")
         );
       } else {
-
         state.filteredProducts = state.unSortedProducts;
       }
-      state.products = paginateProducts(state.filteredProducts,state.page,state.itemsPerPage);
+      state.products = paginateProducts(
+        state.filteredProducts,
+        state.page,
+        state.itemsPerPage
+      );
       state.sortBypriceHightoLowfilterFlag = false;
     },
     sortByHighToLow: (state) => {
@@ -128,8 +100,7 @@ const productSlice = createSlice({
         state.filteredProducts = state.filteredProducts.sort(
           sortBy("price", 1)
         ); // Assuming `sortBy` handles the sort order with a second parameter
-      }
-      else if (state.sortByratingFlag) {
+      } else if (state.sortByratingFlag) {
         // Assuming there's a flag for sorting by rating
         state.filteredProducts = state.unSortedProducts.sort(
           sortByRatings("rating")
@@ -138,7 +109,11 @@ const productSlice = createSlice({
         console.log("Inside this");
         state.filteredProducts = state.unSortedProducts;
       }
-      state.products = paginateProducts(state.filteredProducts,state.page,state.itemsPerPage);
+      state.products = paginateProducts(
+        state.filteredProducts,
+        state.page,
+        state.itemsPerPage
+      );
       state.sortBypriceLowtoHighFlag = false;
     },
     sortByRating: (state) => {
@@ -147,18 +122,15 @@ const productSlice = createSlice({
         state.filteredProducts = state.filteredProducts
           .sort(sortByRatings("rating"))
           .map((e) => e);
-      } 
-      else if(state.sortBypriceHightoLowfilterFlag){
+      } else if (state.sortBypriceHightoLowfilterFlag) {
         state.filteredProducts = state.filteredProducts.sort(
           sortBy("price", 1)
         );
-      }
-      else if(state.sortBypriceLowtoHighFlag){
+      } else if (state.sortBypriceLowtoHighFlag) {
         state.filteredProducts = state.filteredProducts.sort(
           sortBy("price", -1)
         );
-      }
-      else {
+      } else {
         state.filteredProducts = state.unSortedProducts;
       }
       state.products = paginateProducts(
@@ -169,7 +141,11 @@ const productSlice = createSlice({
     },
     resetAll: (state) => {
       state.filteredProducts = state.unSortedProducts;
-      state.products = paginateProducts(state.filteredProducts,state.page,state.itemsPerPage);
+      state.products = paginateProducts(
+        state.filteredProducts,
+        state.page,
+        state.itemsPerPage
+      );
       state.sortBypriceHightoLowfilterFlag = false;
       state.sortBypriceLowtoHighFlag = false;
       state.sortByratingFlag = false;
@@ -185,7 +161,11 @@ const productSlice = createSlice({
         state.allProducts = action.payload;
         state.filteredProducts = action.payload;
         state.unSortedProducts = action.payload;
-        state.products = paginateProducts(state.allProducts,state.page, state.itemsPerPage);
+        state.products = paginateProducts(
+          state.allProducts,
+          state.page,
+          state.itemsPerPage
+        );
       })
       .addCase(getProducts.rejected, (state, action) => {
         state.isLoading = false;

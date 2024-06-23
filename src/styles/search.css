@@ -1,13 +1,45 @@
-@media 
-only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 904px){
-   .container{
-    width:100%;
-   } 
-   .searchcontainer{
-     gap: 10px;
-   }
+.suggestion {
+  width: 67%;
+}
 
- 
-  
-  
+.suggestionContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 10% 90%;
+  align-items: center;
+  justify-items: center;
+  gap: 10px;
+}
+
+.suggestion::-webkit-scrollbar {
+  width: 3px; /* Adjust the width as needed */
+}
+.suggestion::-webkit-scrollbar-track {
+  background: rgb(47, 46, 46); /* Background of the scrollbar track */
+  border-radius: 10px;
+}
+
+.suggestion::-webkit-scrollbar-thumb {
+  background: #cdcccc; /* Color of the scrollbar thumb */
+  border-radius: 10px;
+}
+
+.suggestion::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar thumb on hover */
+}
+
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 904px) {
+  .container {
+    width: 100%;
+  }
+  .searchcontainer {
+    gap: 10px;
+  }
+  .suggestion {
+    width: 100%;
+  }
+  .suggestionContainer {
+    grid-template-columns: 30% 70%;
+  }
 }
