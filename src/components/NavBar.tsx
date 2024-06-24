@@ -24,7 +24,7 @@ const NavBar: React.FC = () => {
           className="object-cover h-10 w-10 sm:h-8 w-10"
           alt="Logo"
         />
-        <strong className="lg:text-xl sm:text-xs">Fake_Store</strong>
+        <strong className="lg:text-xl sm:text-xs">Just_Store</strong>
       </section>
       <section className="flex items-center w-full md:w-1/3 sm:w-1/2 px-2">
         <ul className="flex w-full justify-between items-center h-full">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { selectProducts } from "../../product/productSlice";
 import "../../../../styles/search.css";
@@ -37,14 +37,14 @@ const Suggestion: React.FC<SuggestionProps> = ({ category, searchedText }) => {
       });
   };
 
-  const filteredProducts = filterProducts(allProducts, category, searchedText);
+  const memoizedfilteredProducts = useMemo(()=>filterProducts(allProducts,category,searchedText),[allProducts,category,searchedText])
 
   return (
     <div className="w-auto border suggestion rounded-xl p-1 overflow-y-auto h-96 overflow-x-hidden">
-      {filteredProducts.length === 0 ? (
+      {memoizedfilteredProducts.length === 0 ? (
         <div className="flex justify-center items-center font-semibold text-red-200">Requested Data Not Available</div>
       ) : (
-        filteredProducts.map((product) => (
+        memoizedfilteredProducts.map((product) => (
           <SuggestionView key={product.id} product={product} text={searchedText} />
         ))
       )}

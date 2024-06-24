@@ -26,7 +26,7 @@ const itemstyle = {
 export default function Cart() {
   const navigate = useNavigate();
 
-  useFetch(fetchAllCartProducts, []);
+  useFetch(fetchAllCartProducts,[]);
 
   const { cartproducts, isLoading, error, total } = useSelector(
     (state: RootState) => state.cart
@@ -53,6 +53,9 @@ export default function Cart() {
 
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+  if(cartproducts.length===0){
+    return <div>Cart is Empty Add Something</div>
   }
   if (error) {
     return <div>Error: {error}</div>;
