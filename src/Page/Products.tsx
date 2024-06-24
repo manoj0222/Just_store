@@ -107,7 +107,7 @@ const Products: React.FC = () => {
                 rounded-xl 
                 border
                 hover:bg-white hover:shadow-lg
-                 
+                foucs:bg-white hover:shadow-lg
                 "
           >
             <section
