@@ -34,8 +34,9 @@ const SuggestionView: React.FC<SuggestionViewProp> = ({ product, text }) => {
      suggestionContainer
      rounded-xl
      mb-2
-     hover:cursor-pointer hover:bg-white
-     focus:pointer-events-auto
+     hover:cursor-pointer hover:bg-slate-100
+     focus:bg-slate-100
+     bg-white
      "
      to={`/products/${product.id}`}
      >

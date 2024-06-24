@@ -14,7 +14,7 @@ import { Suspense } from 'react';
 function App() {
   return (
     <Provider store={store}>
-      <div className="bg-cyan-50 pb-2">
+      <div className="bg-grey-50 pb-2">
         <BrowserRouter>
           <NavBar />
           <Suspense fallback={<div>Loading...</div>}>
